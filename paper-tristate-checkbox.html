@@ -264,27 +264,22 @@ Custom property | Description | Default
       </div>
     </div>
 
-    <div id="checkboxLabel"><content></content></div>
+    <div id="checkboxLabel"><slot></slot></div>
   </template>
 
   <script>
     Polymer({
       is: 'paper-tristate-checkbox',
-
-      listeners: {
-        'tap': '_regularTap'
-      },
-
       behaviors: [
         Polymer.IronFormElementBehavior,
         Polymer.IronValidatableBehavior,
-        Polymer.PaperInkyFocusBehavior
+        Polymer.PaperInkyFocusBehavior,
       ],
 
       hostAttributes: {
-        role: 'checkbox',
+        'role': 'checkbox',
         'aria-checked': 'mixed',
-        tabindex: 0
+        'tabindex': 0,
       },
 
       properties: {
@@ -301,7 +296,7 @@ Custom property | Description | Default
          */
         ariaActiveAttribute: {
           type: String,
-          value: 'aria-checked'
+          value: 'aria-checked',
         },
 
         /**
@@ -311,7 +306,7 @@ Custom property | Description | Default
           type: String,
           value: null,
           reflectToAttribute: true,
-          notify: true
+          notify: true,
         },
 
         /**
@@ -319,7 +314,7 @@ Custom property | Description | Default
          */
         checked: {
           type: String,
-          value: "x"
+          value: 'x',
         },
 
         /**
@@ -327,7 +322,7 @@ Custom property | Description | Default
          */
         unchecked: {
           type: String,
-          value: " "
+          value: ' ',
         },
 
         /**
@@ -335,7 +330,7 @@ Custom property | Description | Default
          */
         indeterminate: {
           type: String,
-          value: ""
+          value: '',
         },
 
         /**
@@ -343,8 +338,15 @@ Custom property | Description | Default
          */
         value: {
           type: String,
-          computed: '_computeValue(state)'
-        }
+          computed: '_computeValue(state)',
+        },
+      },
+
+      attached() {
+        this.addEventListener('click', this._regularClick);
+      },
+      detached() {
+        this.removeEventListener('click', this._regularClick);
       },
 
       /**
@@ -359,8 +361,7 @@ Custom property | Description | Default
         this.$.checkboxLabel.innerHTML = label;
         if (state == 'on' || state == 'off') {
           this.state = state;
-        }
-        else {
+        } else {
           state = null;
         }
       },
@@ -371,29 +372,25 @@ Custom property | Description | Default
         if (state == 'on') {
           this.setAttribute(this.ariaActiveAttribute, 'true');
           return this.checked;
-        }
-        else if (state == 'off') {
+        } else if (state == 'off') {
           this.setAttribute(this.ariaActiveAttribute, 'false');
           return this.unchecked;
-        }
-        else {
+        } else {
           this.setAttribute(this.ariaActiveAttribute, 'mixed');
           // indeterminate can become undefined, so force empty string
-          return this.indeterminate ? this.indeterminate : "";
+          return this.indeterminate ? this.indeterminate : '';
         }
       },
 
       // Element Behavior
 
       // Rotate through the state values.
-      _regularTap: function(e) {
+      _regularClick: function(e) {
         if (this.state == null) {
           this.state = 'on';
-        }
-        else if (this.state == 'on') {
+        } else if (this.state == 'on') {
           this.state = 'off';
-        }
-        else {
+        } else {
           this.state = null;
         }
       },
@@ -401,17 +398,15 @@ Custom property | Description | Default
       _computeCheckboxClass: function(state) {
         if (state == 'on' || state == null) {
           return 'checked';
-        }
-        else {
+        } else {
           return '';
-        };
+        }
       },
 
       _computeCheckmarkClass: function(state) {
         if (state == 'off' || state == null) {
           return 'hidden';
-        }
-        else {
+        } else {
           return '';
         }
       },
@@ -419,8 +414,7 @@ Custom property | Description | Default
       _computeIndeterminatemarkClass: function(state) {
         if (state == 'off' || state == 'on') {
           return 'hidden';
-        }
-        else {
+        } else {
           return '';
         }
       },
@@ -429,8 +423,7 @@ Custom property | Description | Default
       _createRipple: function() {
         this._rippleContainer = this.$.checkboxContainer;
         return Polymer.PaperInkyFocusBehaviorImpl._createRipple.call(this);
-      }
-
+      },
     });
   </script>
 </dom-module>
