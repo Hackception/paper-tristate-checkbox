@@ -1,6 +1,6 @@
 {
   "name": "paper-tristate-checkbox",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "main": "paper-tristate-checkbox.html",
   "description": "A paper-checkbox like element that supports an indeterminate state.",
   "authors": [
