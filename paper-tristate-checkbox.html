@@ -92,7 +92,7 @@ Custom property | Description | Default
         left: calc(0px - (2.66 * var(--calculated-paper-tristate-checkbox-size) - var(--calculated-paper-tristate-checkbox-size)) / 2);
         width: calc(2.66 * var(--calculated-paper-tristate-checkbox-size));
         height: calc(2.66 * var(--calculated-paper-tristate-checkbox-size));
-        color: var(--paper-tristate-checkbox-unchecked-ink-color, --primary-text-color);
+        color: var(--paper-tristate-checkbox-unchecked-ink-color, var(--primary-text-color));
         opacity: 0.6;
         pointer-events: none;
       }
@@ -103,7 +103,7 @@ Custom property | Description | Default
       }
 
       #ink[checked] {
-        color: var(--paper-tristate-checkbox-checked-ink-color, --primary-color);
+        color: var(--paper-tristate-checkbox-checked-ink-color, var(--primary-color));
       }
 
       #checkbox {
@@ -112,7 +112,7 @@ Custom property | Description | Default
         width: 100%;
         height: 100%;
         border: solid 2px;
-        border-color: var(--paper-tristate-checkbox-unchecked-color, --primary-text-color);
+        border-color: var(--paper-tristate-checkbox-unchecked-color, var(--primary-text-color));
         border-radius: 2px;
         pointer-events: none;
         -webkit-transition: background-color 140ms, border-color 140ms;
@@ -166,8 +166,8 @@ Custom property | Description | Default
       }
 
       #checkbox.checked {
-        background-color: var(--paper-tristate-checkbox-checked-color, --primary-color);
-        border-color: var(--paper-tristate-checkbox-checked-color, --primary-color);
+        background-color: var(--paper-tristate-checkbox-checked-color, var(--primary-color));
+        border-color: var(--paper-tristate-checkbox-checked-color, var(--primary-color));
       }
 
       #checkmark {
@@ -218,7 +218,7 @@ Custom property | Description | Default
         padding-left: var(--paper-tristate-checkbox-label-spacing, 8px);
         white-space: normal;
         line-height: normal;
-        color: var(--paper-tristate-checkbox-label-color, --primary-text-color);
+        color: var(--paper-tristate-checkbox-label-color, var(--primary-text-color));
       }
 
       :host-context([dir="rtl"]) #checkboxLabel {
@@ -234,16 +234,16 @@ Custom property | Description | Default
 
       :host([disabled]) #checkbox {
         opacity: 0.5;
-        border-color: var(--paper-tristate-checkbox-unchecked-color, --primary-text-color);
+        border-color: var(--paper-tristate-checkbox-unchecked-color, var(--primary-text-color));
       }
 
       :host([disabled][checked]) #checkbox {
-        background-color: var(--paper-tristate-checkbox-unchecked-color, --primary-text-color);
+        background-color: var(--paper-tristate-checkbox-unchecked-color, var(--primary-text-color));
         opacity: 0.5;
       }
 
       :host([disabled][indeterminate]) #checkbox {
-        background-color: var(--paper-tristate-checkbox-unchecked-color, --primary-text-color);
+        background-color: var(--paper-tristate-checkbox-unchecked-color, var(--primary-text-color));
         opacity: 0.5;
       }
 
@@ -253,7 +253,7 @@ Custom property | Description | Default
 
       /* invalid state */
       #checkbox.invalid:not(.checked) {
-        border-color: var(--paper-tristate-checkbox-error-color, --google-red-500);
+        border-color: var(--paper-tristate-checkbox-error-color, var(--google-red-500));
       }
     </style>
 
@@ -278,7 +278,6 @@ Custom property | Description | Default
 
       hostAttributes: {
         'role': 'checkbox',
-        'aria-checked': 'mixed',
         'tabindex': 0,
       },
 
@@ -343,10 +342,12 @@ Custom property | Description | Default
       },
 
       attached() {
-        this.addEventListener('click', this._regularClick);
+        this.setAttribute('aria-checked', 'mixed');
+        this._computeValue(this.state);
+        this.addEventListener('click', this._regularTap);
       },
       detached() {
-        this.removeEventListener('click', this._regularClick);
+        this.removeEventListener('click', this._regularTap);
       },
 
       /**
@@ -385,7 +386,7 @@ Custom property | Description | Default
       // Element Behavior
 
       // Rotate through the state values.
-      _regularClick: function(e) {
+      _regularTap: function() {
         if (this.state == null) {
           this.state = 'on';
         } else if (this.state == 'on') {
