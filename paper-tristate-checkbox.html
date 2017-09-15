@@ -340,7 +340,9 @@ Custom property | Description | Default
           computed: '_computeValue(state)',
         },
       },
-
+      ready() {
+        this._regularTap = this._regularTap.bind(this);
+      },
       attached() {
         this.setAttribute('aria-checked', 'mixed');
         this._computeValue(this.state);

@@ -16,7 +16,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git://github.com/haydenmcp/paper-tristate-checkbox"
+    "url": "git://github.com/Hackception/paper-tristate-checkbox"
   },
   "license": "http://www.apache.org/licenses/LICENSE-2.0",
   "homepage": "https://github.com/johnthad/paper-tristate-checkbox/",
@@ -28,7 +28,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0 || ^2.0",
+    "polymer": "Polymer/polymer#^1.9 || ^2.0",
     "iron-validatable-behavior": "PolymerElements/iron-validatable-behavior#^1.0 || ^2.0",
     "iron-form-element-behavior": "PolymerElements/iron-form-element-behavior#^1.0 || ^2.0",
     "paper-behaviors": "PolymerElements/paper-behaviors#^1.0 || ^2.0",
@@ -62,6 +62,9 @@
         "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
         "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
         "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7.0"
       }
     }
   },
