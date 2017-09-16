@@ -1,6 +1,6 @@
 {
   "name": "paper-tristate-checkbox",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "paper-tristate-checkbox.html",
   "description": "A paper-checkbox like element that supports an indeterminate state.",
   "authors": [
@@ -36,12 +36,11 @@
     "paper-styles": "PolymerElements/paper-styles#^1.0 || ^2.0"
   },
   "devDependencies": {
-    "test-fixture": "PolymerElements/test-fixture#^1.0 || ^2.0",
     "iron-component-page": "PolymerElements/iron-component-page#^1.0 || ^2.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0 || ^2.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0 || ^2.0",
     "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0 || ^2.0",
-    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "web-component-tester": "^5.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   },
   "variants": {
@@ -57,7 +56,6 @@
       "devDependencies": {
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
         "web-component-tester": "^4.0.0",
-        "test-fixture": "PolymerElements/test-fixture#^1.0.0",
         "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
         "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
         "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
@@ -69,7 +67,6 @@
     }
   },
   "resolutions": {
-    "test-fixture": "2.0.1",
     "webcomponentsjs": "^1.0.0"
   }
 }

@@ -341,15 +341,15 @@ Custom property | Description | Default
         },
       },
       ready() {
-        this._regularTap = this._regularTap.bind(this);
+        this._regularClick = this._regularClick.bind(this);
       },
       attached() {
         this.setAttribute('aria-checked', 'mixed');
         this._computeValue(this.state);
-        this.addEventListener('click', this._regularTap);
+        this.addEventListener('click', this._regularClick);
       },
       detached() {
-        this.removeEventListener('click', this._regularTap);
+        this.removeEventListener('click', this._regularClick);
       },
 
       /**
@@ -388,7 +388,7 @@ Custom property | Description | Default
       // Element Behavior
 
       // Rotate through the state values.
-      _regularTap: function() {
+      _regularClick: function() {
         if (this.state == null) {
           this.state = 'on';
         } else if (this.state == 'on') {
