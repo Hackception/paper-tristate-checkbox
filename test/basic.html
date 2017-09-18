@@ -139,10 +139,11 @@ This code is under Apache License Version 2.0 (http://www.apache.org/licenses/LI
 
           // This is 4px wider than paper-checkbox b/c there are two <div>s inside #checkbox.
           // However since one or both are always hidden, there is no visual difference.
-          assert.isTrue(9 === tiny.width);
+          // Also note that firefox adds one to the resultent widths which is why the || is present.
+          assert.isTrue((9 === tiny.width) || (10 === tiny.width));
           assert.isTrue(tiny.width < normal.width);
           assert.isTrue(normal.width < giant.width);
-          assert.isTrue(giant.width === 54);
+          assert.isTrue((giant.width === 54) || (giant.width === 55));
         });
 
         suite('checkbox line-height', function() {
