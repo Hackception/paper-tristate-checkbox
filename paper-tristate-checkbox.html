@@ -317,6 +317,15 @@ Custom property | Description | Default
         },
 
         /**
+         * This doesn't technically disable indeterminate, however it does
+         *  prevent the user from triggering it directly.
+         */
+        disableIndeterminate: {
+          type: Boolean,
+          value: false,
+        },
+
+        /**
          * The element's value when `'off'`/unchecked.
          */
         unchecked: {
@@ -393,6 +402,8 @@ Custom property | Description | Default
           this.state = 'on';
         } else if (this.state == 'on') {
           this.state = 'off';
+        } else if (this.disableIndeterminate) {
+          this.state = 'on';
         } else {
           this.state = null;
         }
