@@ -101,6 +101,16 @@ This code is under Apache License Version 2.0 (http://www.apache.org/licenses/LI
           });
           MockInteractions.tap(c1);
         });
+        test('unchecked to on via click using disableIndeterminate', function(done) {
+          c1.state = 'off';
+          c1.disableIndeterminate = true;
+          c1.addEventListener('click', function() {
+            assert.isTrue(c1.getAttribute('aria-checked') == 'true');
+            assert.isTrue(c1.value == 'x');
+            done();
+          });
+          MockInteractions.tap(c1);
+        });
         test('disabled checkbox cannot be clicked', function(done) {
           c1.state = null;
           c1.disabled = true;
